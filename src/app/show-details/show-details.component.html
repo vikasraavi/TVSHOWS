@@ -1,0 +1,34 @@
+<div class="topnav">
+    <a class="active pointer" (click)="gotoShows()">Shows</a>
+    <div class="search-container">
+        <input type="text" [(ngModel)]="searchText" placeholder="Search.." name="search">
+        <button (click)="search(searchText)" type="submit"><i class="fa fa-search"></i></button>
+    </div>
+</div>
+
+<div class="main mt-3 pl16" *ngIf="isShow">
+    
+    <a href="javascript:void(0)" class="pointer" (click)="back()"><span class="fas fa-back"></span>Back</a>
+    <h4 class="shows">SHOW DETAILS : {{showDetails.name}}</h4>
+    <div class="row">
+        <div class="col-md-2">
+            <img class="setwidth" [src]="showDetails.image != '' && showDetails.image !=null  ? showDetails.image.medium :  'assets/images/man.jpg'" onError="this.src='./../../assets/images/man.jpg'" alt="" >
+            <p>Rating: <span class="left"><span *ngIf="showDetails.rating.average != null" class="fas fa-star clr"></span>{{showDetails.rating.average != null ? showDetails.rating.average : 'NA'}}</span></p>
+        </div>
+        <div class="col-md-6">
+           <span class="fs" [innerHtml]="showDetails.summary"></span>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body bgc">
+                    <h4 class="shows">Show Info</h4>
+                    <p><b>Country:</b> {{showDetails.network.name}}, {{showDetails.network.country.name}}</p>
+                    <p><b>Scheduled:</b> <span *ngFor="let sh of showDetails.schedule.days"> {{sh}} </span>, <span>Time: {{showDetails.schedule.time}}</span></p>
+                    <p><b>Status:</b> {{showDetails.status}}</p>
+                    <p><b>Show Type:</b> {{showDetails.type}}</p>
+                    <p><b>Geners : </b> <span *ngFor="let gen of showDetails.genres">{{gen}}<span *ngIf="showDetails.genres.length - 1">,</span></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

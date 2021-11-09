@@ -1,0 +1,40 @@
+<div class="topnav">
+    <a class="active">Shows</a>
+    <div class="search-container">
+        <input type="text" [(ngModel)]="searchText" placeholder="Search.." name="search">
+        <button (click)="search(searchText)" type="submit"><i class="fa fa-search"></i></button>
+    </div>
+</div>
+  
+<div class="main mt-3 pl16">
+    <fieldset >
+      <legend class="padding25">POPULAR SHOWS</legend>
+        <div class="row">
+            <div class="col-md-2 mt-2" *ngFor="let gen of popularShow">
+                <div class="card mt15" (click)="gotoShowDetails(gen.id)">
+                    <div class="card-body bgc">
+                        <img class="setwidth" [src]="gen.image.medium != '' && gen.image.medium !=null  ? gen.image.medium :  'assets/images/man.jpg'" onError="this.src='./../../assets/images/man.jpg'" alt="" >
+                        <p class="mt-2 ellpse">{{gen.name}}</p>
+                        <p class="ellpse">{{gen.type}} <span  class="left"><span *ngIf="gen.rating.average != null" class="fas fa-star"></span>{{gen.rating.average != null ? gen.rating.average : 'NA'}}</span></p>
+                    </div>
+                  </div>
+            </div>
+        </div>
+  </fieldset>
+  <fieldset *ngFor="let genls of showFilteredList">
+      <legend class="padding25">{{genls.genreName}}</legend>
+        <div class="row pb20">
+            <div class="col-md-2 mt-2" *ngFor="let gen of genls.genreData.slice(0, 12)">
+                <div class="card mt15" (click)="gotoShowDetails(gen.id)"  >
+                    <div class="card-body bgc">
+                        <img class="setwidth" [src]="gen.image.medium != '' && gen.image.medium !=null  ? gen.image.medium :  'assets/images/man.jpg'" onError="this.src='./../../assets/images/man.jpg'" alt="" >
+                        <p class="mt-2 ellpse">{{gen.name}}</p>
+                        <p class="ellpse">{{genls.genreName}} <span class="left"><span *ngIf="gen.rating.average != null" class="fas fa-star"></span>{{gen.rating.average != null ? gen.rating.average : 'NA'}}</span></p>
+                    </div>
+                  </div>
+            </div>
+        </div>
+  </fieldset>
+  </div>
+
+  

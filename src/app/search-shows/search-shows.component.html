@@ -1,0 +1,23 @@
+<div class="topnav">
+    <a class="active">Shows</a>
+    <div class="search-container">
+        <input type="text" [(ngModel)]="searchText" placeholder="Search.." name="search">
+        <button (click)="search(searchText)" type="submit"><i class="fa fa-search"></i></button>
+    </div>
+</div>
+<div class="main mt-3 pl16">
+    <a href="javascript:void(0)" class="pointer" (click)="back()"><span class="fas fa-back"></span>Back</a>
+
+    <h4 class="shows">SEARCHED SHOWS</h4>
+    <div class="row pb20">
+      <div class="col-md-2 mt-2" *ngFor="let sea of searchDetails">
+          <div class="card mt15" (click)="gotoShowDetails(sea.show.id)">
+              <div class="card-body bgc">
+                  <img class="setwidth" [src]="sea.show.image != '' && sea.show.image !=null  ? sea.show.image.medium :  '../../assets/images/man.jpg'" onError="this.src='./../../assets/images/man.jpg'" alt="" >
+                  <p class="mt-2 ellpse">{{sea.show.name}}</p>
+                  <p>Rating: <span class="left"><span *ngIf="sea.show.rating.average !=null" class="fas fa-star"></span>{{sea.show.rating.average !=null ? sea.show.rating.average : 'NA'}}</span></p>
+              </div>
+            </div>
+      </div>
+  </div>
+  </div>
